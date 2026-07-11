@@ -47,5 +47,10 @@ class ModeSelectState(GameState):
         self.ctx.draw_demo_background(screen)
         draw_center_text(screen, self.ctx.fonts["heading"], "Choose Mode", self.ctx.theme.text, (480, 96))
         self.menu.draw(
-            screen, self.ctx.fonts["menu"], self.ctx.fonts["small"], self.ctx.theme.text, self.ctx.theme.accent, self.ctx.theme.muted
+            screen,
+            self.ctx.fonts["menu"],
+            self.ctx.fonts["small"],
+            self.ctx.theme.text,
+            self.ctx.theme.accent,
+            self.ctx.theme.muted,
         )

@@ -16,8 +16,12 @@ class DifficultySelectState(GameState):
         self.menu = Menu(
             [
                 MenuChoice(Difficulty.ROOKIE.value, Difficulty.ROOKIE.value, "Delayed reactions and real mistakes."),
-                MenuChoice(Difficulty.PRO.value, Difficulty.PRO.value, "Trajectory prediction with human-like correction."),
-                MenuChoice(Difficulty.LEGENDARY.value, Difficulty.LEGENDARY.value, "Precise, fast, and aggressive angles."),
+                MenuChoice(
+                    Difficulty.PRO.value, Difficulty.PRO.value, "Trajectory prediction with human-like correction."
+                ),
+                MenuChoice(
+                    Difficulty.LEGENDARY.value, Difficulty.LEGENDARY.value, "Precise, fast, and aggressive angles."
+                ),
                 MenuChoice("Back", "back"),
             ],
             (480, 295),
@@ -42,5 +46,10 @@ class DifficultySelectState(GameState):
         self.ctx.draw_demo_background(screen)
         draw_center_text(screen, self.ctx.fonts["heading"], "AI Difficulty", self.ctx.theme.text, (480, 96))
         self.menu.draw(
-            screen, self.ctx.fonts["menu"], self.ctx.fonts["small"], self.ctx.theme.text, self.ctx.theme.accent, self.ctx.theme.muted
+            screen,
+            self.ctx.fonts["menu"],
+            self.ctx.fonts["small"],
+            self.ctx.theme.text,
+            self.ctx.theme.accent,
+            self.ctx.theme.muted,
         )

@@ -12,7 +12,11 @@ class ControlsState(GameState):
 
     def handle_event(self, event: pygame.event.Event) -> None:
         if event.type == pygame.KEYDOWN and event.key in (pygame.K_ESCAPE, pygame.K_RETURN, pygame.K_SPACE):
-            target = self.ctx.previous_state if self.ctx.previous_state in (StateId.MAIN_MENU, StateId.PAUSED) else StateId.MAIN_MENU
+            target = (
+                self.ctx.previous_state
+                if self.ctx.previous_state in (StateId.MAIN_MENU, StateId.PAUSED)
+                else StateId.MAIN_MENU
+            )
             self.ctx.change_state(target)
 
     def update(self, dt: float) -> None:

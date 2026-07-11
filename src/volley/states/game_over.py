@@ -35,5 +35,10 @@ class GameOverState(GameState):
         draw_center_text(screen, self.ctx.fonts["heading"], self.ctx.winner, self.ctx.theme.text, (480, 142))
         draw_center_text(screen, self.ctx.fonts["menu"], self.ctx.final_score, self.ctx.theme.accent, (480, 218))
         self.menu.draw(
-            screen, self.ctx.fonts["menu"], self.ctx.fonts["small"], self.ctx.theme.text, self.ctx.theme.accent, self.ctx.theme.muted
+            screen,
+            self.ctx.fonts["menu"],
+            self.ctx.fonts["small"],
+            self.ctx.theme.text,
+            self.ctx.theme.accent,
+            self.ctx.theme.muted,
         )

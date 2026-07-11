@@ -48,6 +48,8 @@ class MainMenuState(GameState):
         self.ctx.draw_demo_background(screen)
         title = outlined_text(self.ctx.fonts["title"], "VOLLEY", theme.accent, (0, 0, 0))
         scale = pulse_scale(self.t)
-        title = pygame.transform.smoothscale(title, (round(title.get_width() * scale), round(title.get_height() * scale)))
+        title = pygame.transform.smoothscale(
+            title, (round(title.get_width() * scale), round(title.get_height() * scale))
+        )
         screen.blit(title, title.get_rect(center=(480, 128)))
         self.menu.draw(screen, self.ctx.fonts["menu"], self.ctx.fonts["small"], theme.text, theme.accent, theme.muted)

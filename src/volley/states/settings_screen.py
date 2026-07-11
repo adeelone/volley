@@ -63,7 +63,11 @@ class SettingsState(GameState):
         save_settings(s)
 
     def _back(self) -> None:
-        target = self.ctx.previous_state if self.ctx.previous_state in (StateId.MAIN_MENU, StateId.PAUSED) else StateId.MAIN_MENU
+        target = (
+            self.ctx.previous_state
+            if self.ctx.previous_state in (StateId.MAIN_MENU, StateId.PAUSED)
+            else StateId.MAIN_MENU
+        )
         self.ctx.change_state(target)
 
     def update(self, dt: float) -> None:
