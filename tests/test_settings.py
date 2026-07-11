@@ -15,12 +15,16 @@ def local_temp_path(name: str) -> Path:
 def test_settings_round_trip() -> None:
     path = local_temp_path("settings")
     settings = GameSettings(theme="Sunset", music_volume=0.2, sfx_volume=0.4, win_score=15)
+    settings.keys.p1_up = 97
+    settings.keys.p2_down = 98
     save_settings(settings, path)
     loaded = load_settings(path)
     assert loaded.theme == "Sunset"
     assert loaded.music_volume == 0.2
     assert loaded.sfx_volume == 0.4
     assert loaded.win_score == 15
+    assert loaded.keys.p1_up == 97
+    assert loaded.keys.p2_down == 98
 
 
 def test_corrupt_settings_fall_back() -> None:

@@ -2,7 +2,8 @@ from __future__ import annotations
 
 import pygame
 
-from volley.config import StateId
+from volley.config import Mode, StateId
+from volley.settings import load_high_scores
 from volley.states.base import GameState
 from volley.ui.menu import Menu, MenuChoice
 from volley.ui.text_fx import draw_center_text
@@ -34,6 +35,19 @@ class GameOverState(GameState):
         self.ctx.playing.particles.draw(screen)
         draw_center_text(screen, self.ctx.fonts["heading"], self.ctx.winner, self.ctx.theme.text, (480, 142))
         draw_center_text(screen, self.ctx.fonts["menu"], self.ctx.final_score, self.ctx.theme.accent, (480, 218))
+        self.menu.center = (480, 360)
+        if self.ctx.mode is Mode.RALLY:
+            draw_center_text(screen, self.ctx.fonts["small"], "Top Rally Scores", self.ctx.theme.text, (480, 268))
+            for idx, score in enumerate(load_high_scores(), start=1):
+                line = f"{idx}. Rally {score.rally} | Max speed {score.max_speed}"
+                draw_center_text(
+                    screen,
+                    self.ctx.fonts["small"],
+                    line,
+                    self.ctx.theme.muted,
+                    (480, 292 + idx * 22),
+                )
+            self.menu.center = (480, 452)
         self.menu.draw(
             screen,
             self.ctx.fonts["menu"],

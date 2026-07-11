@@ -25,7 +25,10 @@ class MainMenuState(GameState):
         self.t = 0.0
 
     def handle_event(self, event: pygame.event.Event) -> None:
+        previous_selection = self.menu.selected
         choice = self.menu.handle_event(event)
+        if choice is None and self.menu.selected != previous_selection:
+            self.ctx.audio.play("menu")
         if choice:
             self.ctx.audio.play("confirm")
         if choice == "play":

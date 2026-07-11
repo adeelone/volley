@@ -13,7 +13,19 @@ from volley.ui.text_fx import draw_center_text
 class SettingsState(GameState):
     state_id = StateId.SETTINGS
 
-    rows = ["music", "sfx", "theme", "motion", "trail", "score", "keys", "back"]
+    rows = [
+        "music",
+        "sfx",
+        "theme",
+        "motion",
+        "trail",
+        "score",
+        "p1_up",
+        "p1_down",
+        "p2_up",
+        "p2_down",
+        "back",
+    ]
 
     def enter(self) -> None:
         self.selected = 0
@@ -55,8 +67,8 @@ class SettingsState(GameState):
             s.ball_trail = not s.ball_trail
         elif row == "score":
             s.win_score = max(3, min(31, s.win_score + direction))
-        elif row == "keys":
-            self.rebinding = "p1_up"
+        elif row in {"p1_up", "p1_down", "p2_up", "p2_down"}:
+            self.rebinding = row
         elif row == "back":
             self._back()
         self.ctx.audio.set_volumes(s.music_volume, s.sfx_volume)
@@ -76,6 +88,7 @@ class SettingsState(GameState):
     def draw(self, screen: pygame.Surface) -> None:
         screen.fill(self.ctx.theme.background)
         draw_center_text(screen, self.ctx.fonts["heading"], "Settings", self.ctx.theme.text, (480, 70))
+        key_labels = self.ctx.settings.keys.labels()
         labels = [
             f"Music Volume  {self.ctx.settings.music_volume:.0%}",
             f"SFX Volume  {self.ctx.settings.sfx_volume:.0%}",
@@ -83,19 +96,23 @@ class SettingsState(GameState):
             "Reduce Motion",
             "Ball Trail",
             f"Win Score  {self.ctx.settings.win_score}",
-            "Rebind P1 Up",
+            f"P1 Up  {key_labels['p1_up']}",
+            f"P1 Down  {key_labels['p1_down']}",
+            f"P2 Up  {key_labels['p2_up']}",
+            f"P2 Down  {key_labels['p2_down']}",
             "Back",
         ]
         if self.rebinding:
+            binding_name = self.rebinding.replace("_", " ").upper()
             draw_center_text(
                 screen,
                 self.ctx.fonts["small"],
-                "Press a replacement key. Existing bindings are rejected.",
+                f"Press a replacement key for {binding_name}. Existing bindings are rejected.",
                 self.ctx.theme.accent,
                 (480, 480),
             )
         for idx, label in enumerate(labels):
-            y = 135 + idx * 44
+            y = 118 + idx * 36
             color = self.ctx.theme.accent if idx == self.selected else self.ctx.theme.text
             draw_center_text(screen, self.ctx.fonts["menu"], label, color, (455, y))
             if self.rows[idx] == "motion":
