@@ -22,10 +22,13 @@ jobs:
       - run: python -m pip install -e ".[dev]"
       - run: python scripts/generate_sfx.py
       - run: python -m PyInstaller --noconfirm --name Volley --windowed --collect-data volley src/volley/main.py
+      - name: Package build
+        shell: pwsh
+        run: Compress-Archive -Path dist/Volley/* -DestinationPath Volley-${{ runner.os }}.zip -Force
       - uses: actions/upload-artifact@v4
         with:
           name: Volley-${{ runner.os }}
-          path: dist/Volley/**
+          path: Volley-${{ runner.os }}.zip
   release:
     needs: build
     runs-on: ubuntu-latest
@@ -36,4 +39,4 @@ jobs:
       - uses: softprops/action-gh-release@v2
         with:
           draft: true
-          files: artifacts/**
+          files: artifacts/**/*.zip
