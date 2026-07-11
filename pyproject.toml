@@ -12,7 +12,7 @@ license = {text = "MIT"}
 authors = [{name = "adeelone"}]
 dependencies = [
   "pygame-ce>=2.5.3",
-  "platformdirs>=4.2.0",
+  "platformdirs>=4.10.0",
 ]
 
 [project.optional-dependencies]
