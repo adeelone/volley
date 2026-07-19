@@ -1,6 +1,6 @@
 # Requirements Audit
 
-Source: `C:\Users\adeem\Downloads\pong-codex-prompt.md`
+Source: `pong-codex-prompt.md`
 
 Status summary: 43 PASS, 3 PARTIAL, 0 FAIL.
 
